@@ -1,0 +1,73 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Outfit', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Russo One', 'Outfit', sans-serif;
+
+  --animate-shimmer: shimmer 5s linear infinite;
+  --animate-shine: shine 3s ease-in-out infinite;
+
+  @keyframes shimmer {
+    to {
+      background-position: 200% center;
+    }
+  }
+  @keyframes shine {
+    0% {
+      transform: translateX(-120%) skewX(-20deg);
+    }
+    60%,
+    100% {
+      transform: translateX(220%) skewX(-20deg);
+    }
+  }
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    @apply min-h-dvh bg-[#02040a] font-sans text-white antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+  button:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply border border-white/10 bg-white/[0.04] backdrop-blur-xl;
+  }
+  .text-gradient {
+    background-image: linear-gradient(90deg, #34d399, #22d3ee, #a3e635, #34d399);
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: var(--animate-shimmer);
+  }
+  .glow-text {
+    text-shadow: 0 0 32px currentColor;
+  }
+  .bg-stadium {
+    background:
+      radial-gradient(ellipse 80% 60% at 50% -10%, rgba(34, 211, 238, 0.18), transparent 60%),
+      radial-gradient(ellipse 70% 50% at 50% 115%, rgba(16, 185, 129, 0.28), transparent 65%),
+      linear-gradient(180deg, #06121f 0%, #030812 55%, #02040a 100%);
+  }
+  .bg-grid {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.5) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.5) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
